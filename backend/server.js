@@ -10,8 +10,8 @@ const DATA_FILE = path.join(path.resolve(), 'backend/data.json');
 
 // 提供靜態文件（前端）
 // Middleware
-app.use(cors());
-app.use(bodyParser.json());
+app.use(cors()); //允許跨來源請求，解決前後端跨域問題
+app.use(bodyParser.json()); //解析請求中的 JSON 數據，並將其轉換為 JavaScript 對象，存放在 req.body 中
 app.use(express.static(path.join(path.resolve(), 'frontend')));
 
 
@@ -41,7 +41,7 @@ app.get('/api/items', (req, res) => {
 });
 
 app.post('/api/items', (req, res) => {
-    console.log("Received data:", req.body);
+    ("Received data:", req.body);
     const data = loadData();
     const newItem = { id: Date.now(), ...req.body };
     data.push(newItem);

@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3001/api/items';
+const API_URL = '/api/items';
 
 function loadItems() {
     $.get(API_URL, (data) => {
@@ -9,8 +9,8 @@ function loadItems() {
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     ${item.text}
                     <div>
-                        <button class="btn btn-sm btn-warning edit-btn" data-id="${item.id}">Edit</button>
-                        <button class="btn btn-sm btn-danger delete-btn" data-id="${item.id}">Delete</button>
+                        <button class="btn btn-sm btn-warning edit-btn" data-id="${item.id}">編輯</button>
+                        <button class="btn btn-sm btn-danger delete-btn" data-id="${item.id}">刪除</button>
                     </div>
                 </li>
             `);
@@ -22,7 +22,7 @@ function addItem() {
     const itemText = $('#itemInput').val();
     if (!itemText) return;
     $.ajax({
-        url: 'http://localhost:3001/api/items', // API 地址
+        url: API_URL, // API 地址
         method: 'POST', // 使用 POST 方法
         contentType: 'application/json', // 明確指定 JSON 格式
         data: JSON.stringify({ text: itemText }), // 傳遞數據
@@ -45,7 +45,7 @@ function deleteItem(id) {
 }
 
 function editItem(id) {
-    const newText = prompt('Enter new text:');
+    const newText = prompt('輸入新文字:');
     if (!newText) return;
     $.ajax({
         url: `${API_URL}/${id}`,
